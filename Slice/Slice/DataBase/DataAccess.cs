@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using SQLite;
 
@@ -7,43 +8,55 @@ namespace Slice.DataBase
 {
     public class DataAccess
     {
-        private SQLiteConnection db;
+        private SQLiteConnection _db;
 
         public DataAccess(string databasePath)
         {
-            db = new SQLiteConnection(databasePath);
-            db.CreateTable<User>();
-        }
-
-        public User GetUser(int id)
-        {
-            return db.Get<User>(id);
-        }
-
-        public IEnumerable<User> GetUsers()
-        {
-            return db.Table<User>();
-        }
-
-        public int DelUser(int id)
-        {
-            return db.Delete<User>(id);
+            _db = new SQLiteConnection(databasePath);
+            _db.CreateTable<User>();
+            _db.CreateTable<Project>();
         }
 
         public int SaveUser(User user)
         {
             if (user.Id != 0)
             {
-                db.Update(user);
+                _db.Update(user);
                 return user.Id;
             }
             else
-                return db.Insert(user);
+                return _db.Insert(user);
         }
 
-        public int UpdateUser(User user)
+        public int SaveProject(Project project)
         {
-            return db.Update(user);
+            if (project.Id != 0)
+            {
+                _db.Update(project);
+                return project.Id;
+            }
+            else
+                return _db.Insert(project);
+        }
+
+        public int DeleteProject(int idProject)
+        {
+            return _db.Delete<Project>(idProject);
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return _db.Table<User>();
+        }
+
+        public IEnumerable<Project> GetProjects()
+        {
+            return _db.Table<Project>().ToList();
+        }
+
+        public IEnumerable<Project> GetProjectsByUser(int idUser)
+        {
+            return GetProjects().Where(project => project.User_Id == idUser);
         }
     }
 }

@@ -5,15 +5,16 @@ using SQLite;
 
 namespace Slice.DataBase
 {
-    [Table("Users")]
-    public class User
+    [Table("Projects")]
+    public class Project
     {
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }
 
         [Unique]
-        public string FIO { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
+        public int User_Id { get; set; }
     }
 }

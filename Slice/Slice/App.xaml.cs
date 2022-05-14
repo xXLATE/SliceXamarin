@@ -9,9 +9,8 @@ namespace Slice
 {
     public partial class App : Application
     {
-        public const string DATABASE_NAME = "Slice.db";
         public static DataAccess db;
-        public static int userID;
+        public const string DATABASE_NAME = "Slice.db";
 
         public static DataAccess Db
         {

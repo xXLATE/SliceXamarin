@@ -3,29 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Slice.Pages.Projects">
 
-    <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" >
-            <Label
-                FontSize="20"
-                Text="Проекты"
-                TextColor="White"
-                Margin="25, 0, 0, 0"
-                HorizontalOptions="CenterAndExpand"/>
-            <Label
-                Text="+"
-                FontSize="20"
-                WidthRequest="25"
-                HeightRequest="25"
-                TextColor="White" />
-        </StackLayout>
-    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Order="Primary" Clicked="NewProject_Clicked"/>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ListView
+            x:Name="ProjectsLV"
+            ItemSelected="ProjectsLV_ItemSelected"
+            ItemsSource="{Binding}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout>
+                                <Label Padding="10" Text="{Binding Name}" TextColor="Black" FontSize="Medium" />
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
     
 </ContentPage>

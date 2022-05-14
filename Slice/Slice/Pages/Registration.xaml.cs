@@ -26,7 +26,7 @@ namespace Slice.Pages
                 {
                     var user = new User
                     {
-                        Name = FIOEntry.Text,
+                        FIO = FIOEntry.Text,
                         Login = LoginEntry.Text,
                         Password = PasswordEntry.Text,
                     };

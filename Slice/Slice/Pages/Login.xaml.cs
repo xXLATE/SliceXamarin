@@ -36,8 +36,7 @@ namespace Slice.Pages
                 {
                     if (user.Login == LoginEntry.Text && user.Password == PasswordEntry.Text)
                     {
-                        App.userID = user.Id;
-                        await Navigation.PushAsync(new Projects());
+                        await Navigation.PushAsync(new Projects(user));
                         haveUser = true;
                     }
                 }
